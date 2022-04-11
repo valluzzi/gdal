@@ -1,10 +1,9 @@
 #### Use latest Ubuntu
-FROM ubuntu/apache2:latest
-#WORKDIR /home/vlr20/Projects/GitHub
+FROM ubuntu:20.04
 
 # Update base container install
+#RUN add-apt-repository ppa:ubuntugis/ppa
 RUN apt-get update
-#RUN apt-get upgrade -y
 
 ENV TZ 'IT'
 RUN echo $TZ > /etc/timezone && \
@@ -15,7 +14,9 @@ RUN echo $TZ > /etc/timezone && \
     apt-get clean
 
 # Install GDAL dependencies
-RUN apt-get install -y python3-pip libgdal-dev locales git
+
+RUN apt-get install -y python3-pip gdal-bin libgdal-dev locales
+RUN apt-get install -y python3-numpy 
 
 # Ensure locales configured correctly
 RUN locale-gen it_IT.UTF-8
@@ -29,7 +30,6 @@ RUN echo 'alias pip=pip3' >> ~/.bashrc
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
 
-# This will install latest version of GDAL
-RUN pip3 install numpy==1.20.3
-RUN pip3 install GDAL==3.2.1
+# This will install GDAL
+RUN pip install GDAL
 
