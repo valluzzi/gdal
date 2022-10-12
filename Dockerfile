@@ -3,6 +3,7 @@
 FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
+ENV token='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'
 RUN apt-get update
 #RUN apt-get install -y software-properties-common
 #RUN add-apt-repository ppa:ubuntugis/ppa && apt-get update
@@ -30,4 +31,4 @@ ENV GDAL_DATA=/usr/share/data
 RUN pip install -U numpy
 #RUN pip install GDAL==3.3.2
 
-RUN pip install git+https://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@github.com/valluzzi/eedem.git
+RUN pip install git+https://$token@github.com/valluzzi/eedem.git
