@@ -26,6 +26,6 @@ ENV C_INCLUDE_PATH=/usr/include/gdal
 ENV PROJ_LIB=/usr/share/proj
 ENV GDAL_DATA=/usr/share/data
 RUN pip install -U numpy
-RUN pip install GDAL
+RUN pip install GDAL==3.3.2
 
 #RUN pip install git+https://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@github.com/valluzzi/eedem.git
