@@ -3,13 +3,12 @@
 FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
 #RUN apt-get install -y software-properties-common
 #RUN add-apt-repository ppa:ubuntugis/ppa && apt-get update
 RUN apt-get update
 #EUN apt-get gdal-bin libgdal-dev==3.0.4
 RUN apt-get install -y python3-pip 
-RUN apt-get install -y python3-gdal 
+RUN apt-get install -y python3-gdal gdal-bin
 RUN apt-get install -y locales git
 
 # Set python aliases for python3
@@ -26,7 +25,7 @@ ENV C_INCLUDE_PATH=/usr/include/gdal
 # This will install GDAL
 ENV PROJ_LIB=/usr/share/proj
 ENV GDAL_DATA=/usr/share/data
-#RUN pip install -U numpy
+RUN pip install -U numpy
 #RUN pip install GDAL==3.3.2
 
 RUN pip install git+https://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@github.com/valluzzi/eedem.git
