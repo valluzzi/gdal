@@ -8,7 +8,7 @@ RUN apt-get update
 #RUN add-apt-repository ppa:ubuntugis/ppa && apt-get update
 RUN apt-get update
 RUN apt-get install -y python3-pip 
-RUN apt-get install -y gdal-bin=3.3.2+dfsg-2build1
+RUN apt-get install -y python3-gdal
 RUN apt-get install -y locales git
 
 # Set python aliases for python3
@@ -25,7 +25,7 @@ ENV C_INCLUDE_PATH=/usr/include/gdal
 # This will install GDAL
 ENV PROJ_LIB=/usr/share/proj
 ENV GDAL_DATA=/usr/share/data
-RUN pip install -U numpy
-RUN pip install GDAL==3.3.2
+#RUN pip install -U numpy
+#RUN pip install GDAL==3.3.2
 
 #RUN pip install git+https://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@github.com/valluzzi/eedem.git
