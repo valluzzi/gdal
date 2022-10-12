@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get install -y software-properties-common
 #RUN add-apt-repository ppa:ubuntugis/ppa && apt-get update
-#RUN apt-get update
+RUN apt-get update
 RUN apt-get install -y python3-pip 
 RUN apt-get install -y libgdal-dev 
 RUN apt-get install -y gdal-bin 
