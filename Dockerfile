@@ -8,7 +8,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 #EUN apt-get gdal-bin libgdal-dev==3.0.4
 RUN apt-get install -y python3-pip 
-RUN apt-get install -y python3-gdal gdal-bin
+RUN apt-get install -y python3-gdal 
+RUN apt-get install -y gdal-bin
 RUN apt-get install -y locales git
 
 # Set python aliases for python3
