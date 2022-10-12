@@ -20,7 +20,10 @@ RUN echo 'alias pip=pip3' >> ~/.bashrc
 # Update C env vars so compiler can find gdal
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
-# This will install GDAL
-RUN pip install GDAL
 
+# This will install GDAL
+ENV PROJ_LIB=/usr/share/proj
+ENV GDAL_DATA=/usr/share/data
+RUN pip install -U numpy
+RUN pip install GDAL==3.0.4
 
