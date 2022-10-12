@@ -8,7 +8,6 @@ RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:ubuntugis/ppa && apt-get update
 RUN apt-get update
 RUN apt-get install -y python3-pip gdal-bin libgdal-dev locales git
-#RUN apt-get install -y python3-numpy 
 
 # Set python aliases for python3
 RUN echo 'alias python=python3' >> ~/.bashrc
