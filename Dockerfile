@@ -29,4 +29,5 @@ ENV GDAL_DATA=/usr/share/data
 RUN pip install -U numpy
 RUN pip install GDAL==3.0.4
 
-RUN pip install git+https://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@github.com/valluzzi/eedem.git
+ENV token='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'
+RUN pip install git+https://$token@github.com/valluzzi/eedem.git
