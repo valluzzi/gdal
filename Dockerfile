@@ -49,7 +49,7 @@ ENV GDAL_DATA=/usr/share/data
 # This numpy version is required by numba
 RUN pip install numpy==1.23.0  
 RUN pip install numba
-RUN pip install GDAL>=3.2
+RUN pip install GDAL
 #--------------------------------------------------------                                                    
 #               The End
 #--------------------------------------------------------
