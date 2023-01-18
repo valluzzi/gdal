@@ -1,13 +1,36 @@
-#### Use latest Osgeo/gdal image
+# Copyright (c) 2023 Gecosistema S.r.l.
+
+# Permission is hereby granted, free of charge, to any person
+# obtaining a copy of this software and associated documentation
+# files (the "Software"), to deal in the Software without
+# restriction, including without limitation the rights to use,
+# copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following
+# conditions:
+
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+
 #FROM osgeo/gdal:latest
 FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
-#RUN apt-get install -y software-properties-common
-#RUN add-apt-repository ppa:ubuntugis/ppa && apt-get update
 RUN apt-get update
-#EUN apt-get gdal-bin libgdal-dev==3.0.4
-RUN apt-get install -y python3-pip python3-gdal gdal-bin locales
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:ubuntugis/ppa 
+RUN apt-get update
+RUN apt-get install -y libgdal-dev gdal-bin
+RUN apt-get install -y python3-pip 
 
 # Set python aliases for python3
 RUN echo 'alias python=python3' >> ~/.bashrc
@@ -17,11 +40,16 @@ RUN echo 'alias pip=pip3' >> ~/.bashrc
 #               Python GDAL
 #--------------------------------------------------------
 # Update C env vars so compiler can find gdal
-#ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
-#ENV C_INCLUDE_PATH=/usr/include/gdal
+ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
+ENV C_INCLUDE_PATH=/usr/include/gdal
 
 # This will install GDAL
 ENV PROJ_LIB=/usr/share/proj
 ENV GDAL_DATA=/usr/share/data
-RUN pip install -U numpy
-#RUN pip install GDAL==3.3.2
+# This numpy version is required by numba
+RUN pip install numpy==1.23.0  
+RUN pip install numba
+RUN pip install GDAL
+#--------------------------------------------------------                                                    
+#               The End
+#--------------------------------------------------------
