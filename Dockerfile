@@ -34,6 +34,7 @@ RUN apt-get update
 # RUN apt-get install -y libgdal-dev gdal-bin 
 
 RUN apt-get install -y git
+RUN apt-get update
 RUN apt-get install -y python3-pip
 
 # Set python aliases for python3
