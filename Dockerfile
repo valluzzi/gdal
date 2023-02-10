@@ -21,16 +21,20 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-#FROM osgeo/gdal:latest
-FROM ubuntu:20.04
-
+FROM osgeo/gdal:latest
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:ubuntugis/ppa 
-RUN apt-get update
-RUN apt-get install -y libgdal-dev gdal-bin git
-RUN apt-get install -y python3-pip 
+
+# FROM ubuntu:20.04
+# ARG DEBIAN_FRONTEND=noninteractive
+# RUN apt-get update
+# RUN apt-get install -y software-properties-common
+# RUN add-apt-repository ppa:ubuntugis/ppa 
+# RUN apt-get update
+# RUN apt-get install -y libgdal-dev gdal-bin 
+
+RUN apt-get install -y git
+RUN apt-get install -y python3-pip
 
 # Set python aliases for python3
 RUN echo 'alias python=python3' >> ~/.bashrc
@@ -47,7 +51,7 @@ ENV C_INCLUDE_PATH=/usr/include/gdal
 ENV PROJ_LIB=/usr/share/proj
 ENV GDAL_DATA=/usr/share/data
 # This numpy version is required by numba
-RUN pip install numpy==1.23.0  
+RUN pip install numpy==1.23.5 
 RUN pip install numba
 RUN pip install GDAL
 #--------------------------------------------------------                                                    
