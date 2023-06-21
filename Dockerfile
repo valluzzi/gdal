@@ -21,18 +21,10 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-FROM osgeo/gdal:latest
+#FROM osgeo/gdal:latest
+FROM ghcr.io/osgeo/gdal:ubuntu-small-3.7.0
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
-
-# FROM ubuntu:20.04
-# ARG DEBIAN_FRONTEND=noninteractive
-# RUN apt-get update
-# RUN apt-get install -y software-properties-common
-# RUN add-apt-repository ppa:ubuntugis/ppa 
-# RUN apt-get update
-# RUN apt-get install -y libgdal-dev gdal-bin 
-
 RUN apt-get install -y git python3-pip
 
 # Set python aliases for python3
@@ -49,7 +41,7 @@ ENV C_INCLUDE_PATH=/usr/include/gdal
 # This will install GDAL
 ENV PROJ_LIB=/usr/share/proj
 ENV GDAL_DATA=/usr/share/data
-# This numpy version is required by numba
+# This numpy version is required by numba 
 RUN pip install numpy==1.23.5 
 RUN pip install numba==0.57.1
 RUN pip install GDAL
