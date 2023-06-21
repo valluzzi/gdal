@@ -33,9 +33,7 @@ RUN apt-get update
 # RUN apt-get update
 # RUN apt-get install -y libgdal-dev gdal-bin 
 
-RUN apt-get install -y git
-RUN apt-get update
-RUN apt-get install -y python3-pip
+RUN apt-get install -y git python3-pip
 
 # Set python aliases for python3
 RUN echo 'alias python=python3' >> ~/.bashrc
@@ -53,7 +51,7 @@ ENV PROJ_LIB=/usr/share/proj
 ENV GDAL_DATA=/usr/share/data
 # This numpy version is required by numba
 RUN pip install numpy==1.23.5 
-RUN pip install numba
+RUN pip install numba==0.57.1
 RUN pip install GDAL
 #--------------------------------------------------------                                                    
 #               The End
