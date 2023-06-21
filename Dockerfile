@@ -21,13 +21,11 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
+#FROM osgeo/gdal:latest
 FROM ghcr.io/osgeo/gdal:ubuntu-small-3.7.0
-
-# Update and install required packages
-RUN apt-get update && apt install -y python3-pip git
-# # Set environment variables
-# ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
-# ENV C_INCLUDE_PATH=/usr/include/gdal
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get install -y git python3-pip
 
 # Set python aliases for python3
 RUN echo 'alias python=python3' >> ~/.bashrc
@@ -35,8 +33,7 @@ RUN echo 'alias pip=pip3' >> ~/.bashrc
 
 ENV PROJ_LIB=/usr/share/proj
 ENV GDAL_DATA=/usr/share/data
-
-RUN pip install cython
+# This numpy version is required by numba 
 RUN pip install numpy==1.23.5 
 RUN pip install numba==0.56.4
 RUN pip install GDAL==3.7.0
