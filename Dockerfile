@@ -21,40 +21,25 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
-FROM osgeo/gdal:latest
-ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
+FROM ghcr.io/osgeo/gdal:ubuntu-small-3.7.0
 
-# FROM ubuntu:20.04
-# ARG DEBIAN_FRONTEND=noninteractive
-# RUN apt-get update
-# RUN apt-get install -y software-properties-common
-# RUN add-apt-repository ppa:ubuntugis/ppa 
-# RUN apt-get update
-# RUN apt-get install -y libgdal-dev gdal-bin 
-
-RUN apt-get install -y git
-RUN apt-get update
-RUN apt-get install -y python3-pip
+# Update and install required packages
+RUN apt-get update && apt install -y python3-pip git
+# # Set environment variables
+# ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
+# ENV C_INCLUDE_PATH=/usr/include/gdal
 
 # Set python aliases for python3
 RUN echo 'alias python=python3' >> ~/.bashrc
 RUN echo 'alias pip=pip3' >> ~/.bashrc
 
-#--------------------------------------------------------                                                    
-#               Python GDAL
-#--------------------------------------------------------
-# Update C env vars so compiler can find gdal
-ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
-ENV C_INCLUDE_PATH=/usr/include/gdal
-
-# This will install GDAL
 ENV PROJ_LIB=/usr/share/proj
 ENV GDAL_DATA=/usr/share/data
-# This numpy version is required by numba
+
+RUN pip install cython
 RUN pip install numpy==1.23.5 
-RUN pip install numba
-RUN pip install GDAL
-#--------------------------------------------------------                                                    
-#               The End
-#--------------------------------------------------------
+RUN pip install numba==0.56.4
+RUN pip install GDAL==3.7.0
+
+# Set the entrypoint command
+ENTRYPOINT [ "bash" ]
